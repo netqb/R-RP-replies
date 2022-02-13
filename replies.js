@@ -216,7 +216,7 @@ class Replies {
 
         document.addEventListener('keyup', (e) => {
 
-            if (this.dialogOpen == 1 && e.keyCode != 13 && e.target.placeholder == 'Введите значение') { // считывание кол-ва нормы, введенное пользователем
+            if (this.dialogOpen == 1 && e.keyCode != 36 && e.target.placeholder == 'Введите значение') { // считывание кол-ва нормы, введенное пользователем
                 this.norma = e.target.value;
             }
 
@@ -234,7 +234,7 @@ class Replies {
                 return
             }
 
-            if (e.keyCode == 27 && this.dialogOpen) {
+            if (e.keyCode == 27 && this.dialogOpen) { // вызод на esc либо просто Enter 
                 this.dialogOpen = 0;
             }
         })
@@ -242,7 +242,7 @@ class Replies {
         document.addEventListener('mousedown', (e) => {
             let lastIndex = this.replies.items.length - 1;
 
-            if (this.dialogOpen && e.target.classList[0] == 'window-button' && e.target.innerText == 'Закрыть') {
+            if (this.dialogOpen && e.target.classList[0] == 'window-button' && e.target.innerText == 'Закрыть') { 
                 this.closeReplies();
             }
 
