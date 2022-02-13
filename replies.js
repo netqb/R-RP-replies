@@ -1,4 +1,4 @@
-// new 
+// new
 
 class Replies {
     constructor() {
@@ -11,6 +11,7 @@ class Replies {
         socket.sendEvent("load-replies");
 
         socket.getData((data) => {
+
             let json_data = JSON.parse(data.data);
 
             this.replies = json_data;
@@ -18,8 +19,6 @@ class Replies {
             console.log('База загружена -> ', this.replies);
 
             this.isNewDay();
-
-            socket.getData(() => { });
             return
         });
 
@@ -133,10 +132,10 @@ class Replies {
             this.saveReplies();
         };
 
-        if (this.replies.items.length > 20) {
-            console.log('Замечено больше 20 записей... Старые удаляю...');
+        if (this.replies.items.length > 4) {
+            console.log('Замечено больше 4 записей... Старые удаляю...');
 
-            while (this.replies.items.length > 20) {
+            while (this.replies.items.length > 4) {
                 this.replies.items.shift();
             }
 
@@ -241,15 +240,18 @@ class Replies {
         })
 
         document.addEventListener('mousedown', (e) => {
+            let lastIndex = this.replies.items.length - 1;
+
             if (this.dialogOpen && e.target.classList[0] == 'window-button' && e.target.innerText == 'Закрыть') {
                 this.closeReplies();
             }
 
-            if (e.target.classList[0] == 'window-button' && e.target.innerText == 'Сброс' && this.dialogOpen == 2) {
+            if (e.target.classList[0] == 'window-button' && e.target.innerText == 'Сброс') {
                 this.closeReplies();
-                setTimeout(() => {
-                    item.replies = 0;
-                }, 100);
+
+                this.replies.items[lastIndex].replies = 0;
+
+                this.sendGameText(`[2,\"~y~Успешно!~n~~b~Норма была сброшена\",3000,0,-1,1]`);
                 return
             };
 
