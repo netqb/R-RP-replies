@@ -229,7 +229,7 @@ class Replies {
                 return
             }
 
-            if (e.keyCode == 13 && e.target.tagName === "BODY" && this.dialogOpen == 2) {
+            if (e.keyCode == 36 && e.target.tagName === "BODY" && this.dialogOpen == 2) {
                 this.setRepliesToComplete('new-replies');
                 return
             }
@@ -252,6 +252,8 @@ class Replies {
                 this.replies.items[lastIndex].replies = 0;
 
                 this.sendGameText(`[2,\"~y~Успешно!~n~~b~Норма была сброшена\",3000,0,-1,1]`);
+                this.saveReplies();
+
                 return
             };
 
