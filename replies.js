@@ -102,12 +102,12 @@ class Replies {
         value = value.toString();
 
         if (value == 'new-replies') {
-            App.$children[0].addDialogInQueue("[0,1,\"{FFCD00}Норма\",\"\",\"Далее\",\"\",0,0]", "Введите норму по зеткам.<n><n>По достижению выполнения нормы Вы будете уведомлены,<n>поэтому не стоит ставить огромные числа.", 0);
+            App.$children[0].addDialogInQueue("[0,1,\"{FFCD00}Настройка нормы\",\"\",\"Установить\",\"\",0,0]", "Введите вашу норму по зеткам.<n><n>По достижению выполнения нормы Вы будете уведомлены,<n>поэтому не стоит ставить огромные числа.", 0);
             return
         };
 
         if (!Number.isInteger(+value) || value.startsWith(0) || +value <= 0) {
-            App.$children[0].addDialogInQueue("[0,1,\"Норма\",\"\",\"\",\"Далее\",0,0]", "{D56F33}В поле должны быть цифры и норма не может быть нулевой!", 0);
+            App.$children[0].addDialogInQueue("[0,1,\"Настройка нормы\",\"\",\"\",\"Установить\",0,0]", "{D56F33}В поле не могут быть указаны: буквы, нулевые и отрицательные значения", 0);
             return
         };
 
@@ -226,6 +226,7 @@ class Replies {
 
             if (e.keyCode == 13 && (e.target.tagName === "INPUT" || e.target.tagName === "BODY") && this.dialogOpen == 1 && this.norma) { // на Enter установка нормы по ответам
                 this.setRepliesToComplete(this.norma);
+                this.sendGameText(`[2,\"~y~Успешно!~n~~b~Норма была установлена\",3000,0,-1,1]`);
                 return
             }
 
@@ -257,11 +258,12 @@ class Replies {
                 return
             };
 
-            if (e.target.classList[0] == 'window-button' && e.target.innerText == 'Далее' && this.dialogOpen == 1) {
+            if (e.target.classList[0] == 'window-button' && e.target.innerText == 'Установить' && this.dialogOpen == 1) {
                 this.closeReplies();
                 setTimeout(() => {
                     this.setRepliesToComplete(this.norma);
                 }, 100);
+                this.sendGameText(`[2,\"~y~Успешно!~n~~b~Норма была установлена\",3000,0,-1,1]`);
                 return
             };
         })
