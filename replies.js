@@ -47,7 +47,7 @@ class Replies {
             }
         });
 
-        App.$children[0].addDialogInQueue("[0,0,\"Ответы за 20 дней\",\"\",\"Сброс\",\"Закрыть\",0,0]", "Дата\t\t\t    Ответы / Норма<n><n>{FFFFFF}" + result.reverse().join(''), 0);
+        App.$children[0].addDialogInQueue("[0,0,\"Ответы за 5 дней\",\"\",\"Сброс\",\"Закрыть\",0,0]", "Дата\t\t\t    Ответы / Норма<n><n>{FFFFFF}" + result.reverse().join(''), 0);
         return
     }
     addReply() {
@@ -132,10 +132,10 @@ class Replies {
             this.saveReplies();
         };
 
-        if (this.replies.items.length > 4) {
-            console.log('Замечено больше 4 записей... Старые удаляю...');
+        if (this.replies.items.length > 5) {
+            console.log('Замечено больше 5 записей... Старые удаляю...');
 
-            while (this.replies.items.length > 4) {
+            while (this.replies.items.length > 5) {
                 this.replies.items.shift();
             }
 
@@ -224,7 +224,7 @@ class Replies {
                 this.showReplies();
             }
 
-            if (e.keyCode == 13 && (e.target.tagName === "INPUT" || e.target.tagName === "BODY") && this.dialogOpen == 1 && this.norma) { // на Enter установка нормы по ответам
+            if (e.keyCode == 36 && (e.target.tagName === "INPUT" || e.target.tagName === "BODY") && this.dialogOpen == 1 && this.norma) { // на Home установка нормы по ответам
                 this.setRepliesToComplete(this.norma);
                 return
             }
